@@ -39,6 +39,11 @@ export function App() {
     (value: number) =>
       setInputs((prev) => ({ ...prev, [key]: value }))
 
+  // "Ile na koncie" and "Cena mieszkania" are the same amount: editing either
+  // one updates both.
+  const setAmount = (value: number) =>
+    setInputs((prev) => ({ ...prev, balance: value, price: value }))
+
   const r = React.useMemo(() => calculate(inputs), [inputs])
   const apartmentWins = r.difference > 0
   const tie = Math.abs(r.difference) < 0.5
@@ -114,7 +119,7 @@ export function App() {
               id="balance"
               label="Ile na koncie"
               value={inputs.balance}
-              onChange={set("balance")}
+              onChange={setAmount}
               steps={AMOUNT_STEPS}
               unit="zł"
               typedMin={0}
@@ -171,22 +176,11 @@ export function App() {
               id="price"
               label="Cena mieszkania"
               value={inputs.price}
-              onChange={set("price")}
+              onChange={setAmount}
               steps={AMOUNT_STEPS}
               unit="zł"
               typedMin={0}
               typedMax={50_000_000}
-              endAction={
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="xs"
-                  aria-label="Ustaw cenę równą kwocie na koncie"
-                  onClick={() => set("price")(inputs.balance)}
-                >
-                  = konto
-                </Button>
-              }
             />
             <SliderInputField
               id="rent"
