@@ -30,7 +30,8 @@ const DEFAULTS: Inputs = {
   monthsRented: 10,
 }
 
-const pct = (n: number) => `${Number(n.toFixed(2)).toString().replace(".", ",")}%`
+const pct = (n: number) =>
+  `${Number(n.toFixed(2)).toString().replace(".", ",")}%`
 
 export function App() {
   const [inputs, setInputs] = React.useState<Inputs>(DEFAULTS)
@@ -139,6 +140,7 @@ export function App() {
             />
             <SliderInputField
               id="deposit-tax"
+              showSlider={false}
               label="Podatek od zysku"
               value={inputs.depositTaxPct}
               onChange={set("depositTaxPct")}
@@ -194,6 +196,7 @@ export function App() {
             />
             <SliderInputField
               id="rent-tax"
+              showSlider={false}
               label="Podatek"
               value={inputs.rentTaxPct}
               onChange={set("rentTaxPct")}
@@ -206,6 +209,7 @@ export function App() {
             />
             <SliderInputField
               id="months"
+              showSlider={false}
               label="Miesiące wynajmu w roku"
               value={inputs.monthsRented}
               onChange={set("monthsRented")}

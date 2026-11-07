@@ -13,6 +13,8 @@ interface SliderInputFieldCommonProps {
   value: number
   onChange: (value: number) => void
   disabled?: boolean
+  /** Set to false for a plain number field without the slider. Default true. */
+  showSlider?: boolean
   /** Shown after the number, e.g. "%" or "yr". */
   unit?: string
   /** Shown before the number, e.g. "$". */
@@ -45,8 +47,7 @@ interface DiscreteSliderInputFieldProps extends SliderInputFieldCommonProps {
 }
 
 export type SliderInputFieldProps =
-  | LinearSliderInputFieldProps
-  | DiscreteSliderInputFieldProps
+  LinearSliderInputFieldProps | DiscreteSliderInputFieldProps
 
 function isDiscreteField(
   props: SliderInputFieldProps
@@ -61,6 +62,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
     value,
     onChange,
     disabled,
+    showSlider = true,
     unit,
     prefix,
     endAction,
@@ -72,14 +74,19 @@ export function SliderInputField(props: SliderInputFieldProps) {
   const min = discrete ? props.steps[0] : props.min
   const max = discrete ? props.steps[props.steps.length - 1] : props.max
 
-  const { text, handleChange: handleTextChange, handleBlur } = useNumberInputText(
-    value,
-    onChange,
-    { min: typedMin ?? min, max: typedMax ?? max }
-  )
+  const {
+    text,
+    handleChange: handleTextChange,
+    handleBlur,
+  } = useNumberInputText(value, onChange, {
+    min: typedMin ?? min,
+    max: typedMax ?? max,
+  })
 
   function handleSliderChange(newValue: number | readonly number[]) {
-    const nextValue = Array.isArray(newValue) ? newValue[0] : (newValue as number)
+    const nextValue = Array.isArray(newValue)
+      ? newValue[0]
+      : (newValue as number)
     onChange(discrete ? props.steps[nextValue] : nextValue)
   }
 
@@ -126,15 +133,17 @@ export function SliderInputField(props: SliderInputFieldProps) {
           </div>
         </div>
       </div>
-      <Slider
-        id={`${id}-slider`}
-        value={sliderValue}
-        onValueChange={handleSliderChange}
-        min={sliderMin}
-        max={sliderMax}
-        step={sliderStep}
-        disabled={disabled}
-      />
+      {showSlider ? (
+        <Slider
+          id={`${id}-slider`}
+          value={sliderValue}
+          onValueChange={handleSliderChange}
+          min={sliderMin}
+          max={sliderMax}
+          step={sliderStep}
+          disabled={disabled}
+        />
+      ) : null}
     </div>
   )
 }
