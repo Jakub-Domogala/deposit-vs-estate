@@ -9,8 +9,8 @@ function range(from: number, to: number, step: number): number[] {
 /** Account balance / apartment price: every 10k, up to 1.5 mln. */
 export const AMOUNT_STEPS = range(0, 1_500_000, 10_000)
 
-/** Monthly rent: every 100 zł, up to 30k. */
-export const RENT_STEPS = range(0, 30_000, 100)
+/** Monthly rent: every 100 zł, up to 10k. */
+export const RENT_STEPS = range(0, 10_000, 100)
 
 /** Index of the value in `steps` closest to `value`. */
 export function closestStepIndex(steps: number[], value: number): number {

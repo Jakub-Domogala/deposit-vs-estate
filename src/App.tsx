@@ -177,7 +177,7 @@ export function App() {
             steps={RENT_STEPS}
             unit="zł"
             typedMin={0}
-            typedMax={500_000}
+            typedMax={10_000}
           />
           <div className="grid grid-cols-2 gap-x-4 gap-y-3">
             <SliderInputField
