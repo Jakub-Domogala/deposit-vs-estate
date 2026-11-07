@@ -6,8 +6,8 @@ function range(from: number, to: number, step: number): number[] {
   return out
 }
 
-/** Account balance / apartment price: every 10k, up to 5 mln. */
-export const AMOUNT_STEPS = range(0, 5_000_000, 10_000)
+/** Account balance / apartment price: every 10k, up to 1.5 mln. */
+export const AMOUNT_STEPS = range(0, 1_500_000, 10_000)
 
 /** Monthly rent: every 100 zł, up to 30k. */
 export const RENT_STEPS = range(0, 30_000, 100)

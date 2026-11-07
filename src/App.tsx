@@ -109,7 +109,8 @@ export function App() {
             steps={AMOUNT_STEPS}
             unit="zł"
             typedMin={0}
-            typedMax={50_000_000}
+            typedMax={1_500_000}
+            inputClassName="w-36"
           />
           <div className="grid grid-cols-2 gap-x-4 gap-y-3">
             <SliderInputField
@@ -165,7 +166,8 @@ export function App() {
             steps={AMOUNT_STEPS}
             unit="zł"
             typedMin={0}
-            typedMax={50_000_000}
+            typedMax={1_500_000}
+            inputClassName="w-36"
           />
           <SliderInputField
             id="rent"
