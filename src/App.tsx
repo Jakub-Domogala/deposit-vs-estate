@@ -23,6 +23,10 @@ const DEFAULTS: Inputs = {
   monthsRented: 10,
 }
 
+// Input tints match the winner banner: violet = deposit, pink = apartment.
+const VIOLET = "bg-violet-200 dark:bg-violet-500/25"
+const PINK = "bg-pink-200 dark:bg-pink-500/25"
+
 const pct = (n: number) =>
   `${Number(n.toFixed(2)).toString().replace(".", ",")}%`
 
@@ -77,7 +81,7 @@ export function App() {
               unit="zł"
               typedMin={0}
               typedMax={1_500_000}
-              inputClassName="w-40"
+              inputClassName={`w-40 ${VIOLET}`}
             />
             <div className="grid grid-cols-2 gap-x-4 gap-y-3">
               <SliderInputField
@@ -91,7 +95,7 @@ export function App() {
                 unit="%"
                 typedMin={0}
                 typedMax={100}
-                inputClassName="w-[5.5rem]"
+                inputClassName={`w-[5.5rem] ${VIOLET}`}
               />
               <SliderInputField
                 id="deposit-tax"
@@ -105,7 +109,7 @@ export function App() {
                 unit="%"
                 typedMin={0}
                 typedMax={100}
-                inputClassName="w-[5.5rem]"
+                inputClassName={`w-[5.5rem] ${VIOLET}`}
               />
             </div>
             <Separator />
@@ -134,10 +138,11 @@ export function App() {
               unit="zł"
               typedMin={0}
               typedMax={1_500_000}
-              inputClassName="w-40"
+              inputClassName={`w-40 ${PINK}`}
             />
             <SliderInputField
               id="rent"
+              inputClassName={`w-32 ${PINK}`}
               label="Jaki czynsz miesięczny"
               value={inputs.rent}
               onChange={set("rent")}
@@ -159,7 +164,7 @@ export function App() {
                 unit="%"
                 typedMin={0}
                 typedMax={100}
-                inputClassName="w-[5.5rem]"
+                inputClassName={`w-[5.5rem] ${PINK}`}
               />
               <SliderInputField
                 id="months"
@@ -172,7 +177,7 @@ export function App() {
                 step={1}
                 typedMin={0}
                 typedMax={12}
-                inputClassName="w-16"
+                inputClassName={`w-16 ${PINK}`}
               />
             </div>
             <Separator />
