@@ -242,6 +242,17 @@ export function App() {
           </div>
         </CardContent>
       </Card>
+
+      <footer className="mt-auto pb-1 text-center text-xs text-muted-foreground">
+        <a
+          href="https://buycoffee.to/kubadomogala"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground"
+        >
+          Podoba Ci się? Postaw mi kawę ☕
+        </a>
+      </footer>
     </div>
   )
 }
