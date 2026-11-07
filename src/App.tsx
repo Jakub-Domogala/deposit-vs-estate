@@ -23,14 +23,14 @@ const DEFAULTS: Inputs = {
   monthsRented: 10,
 }
 
-// Input tints match the winner banner: violet = deposit, pink = apartment.
+// Input tints match the winner banner: violet = deposit, blue = apartment.
 const VIOLET = "bg-violet-200 dark:bg-violet-500/25"
-const PINK = "bg-pink-200 dark:bg-pink-500/25"
+const BLUE = "bg-sky-200 dark:bg-sky-500/25"
 
 const VIOLET_SLIDER =
   "[&_[data-slot=slider-range]]:bg-violet-500 [&_[data-slot=slider-track]]:bg-violet-200 dark:[&_[data-slot=slider-track]]:bg-violet-500/25"
-const PINK_SLIDER =
-  "[&_[data-slot=slider-range]]:bg-pink-500 [&_[data-slot=slider-track]]:bg-pink-200 dark:[&_[data-slot=slider-track]]:bg-pink-500/25"
+const BLUE_SLIDER =
+  "[&_[data-slot=slider-range]]:bg-sky-500 [&_[data-slot=slider-track]]:bg-sky-200 dark:[&_[data-slot=slider-track]]:bg-sky-500/25"
 
 const pct = (n: number) =>
   `${Number(n.toFixed(2)).toString().replace(".", ",")}%`
@@ -138,7 +138,7 @@ export function App() {
           <CardContent className="space-y-3">
             <SliderInputField
               id="price"
-              sliderClassName={PINK_SLIDER}
+              sliderClassName={BLUE_SLIDER}
               label="Cena mieszkania"
               value={inputs.price}
               onChange={setAmount}
@@ -146,12 +146,12 @@ export function App() {
               unit="zł"
               typedMin={0}
               typedMax={1_500_000}
-              inputClassName={`w-40 ${PINK}`}
+              inputClassName={`w-40 ${BLUE}`}
             />
             <SliderInputField
               id="rent"
-              sliderClassName={PINK_SLIDER}
-              inputClassName={`w-32 ${PINK}`}
+              sliderClassName={BLUE_SLIDER}
+              inputClassName={`w-32 ${BLUE}`}
               label="Jaki czynsz miesięczny"
               value={inputs.rent}
               onChange={set("rent")}
@@ -173,7 +173,7 @@ export function App() {
                 unit="%"
                 typedMin={0}
                 typedMax={100}
-                inputClassName={`w-[5.5rem] ${PINK}`}
+                inputClassName={`w-[5.5rem] ${BLUE}`}
               />
               <SliderInputField
                 id="months"
@@ -186,7 +186,7 @@ export function App() {
                 step={1}
                 typedMin={0}
                 typedMax={12}
-                inputClassName={`w-16 ${PINK}`}
+                inputClassName={`w-16 ${BLUE}`}
               />
             </div>
             <Separator />
@@ -225,7 +225,7 @@ export function App() {
               tie
                 ? "bg-muted"
                 : apartmentWins
-                  ? "bg-pink-500/15 text-pink-700 dark:text-pink-300"
+                  ? "bg-sky-500/15 text-sky-700 dark:text-sky-300"
                   : "bg-violet-500/15 text-violet-700 dark:text-violet-300"
             )}
           >
