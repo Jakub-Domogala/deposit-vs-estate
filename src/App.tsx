@@ -6,14 +6,7 @@ import { SliderInputField } from "@/components/slider-input-field"
 import { Stat } from "@/components/stat"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { calculate, type Inputs } from "@/lib/calculator"
 import { percentFormat } from "@/lib/number-flow"
@@ -50,44 +43,38 @@ export function App() {
   const tie = Math.abs(r.difference) < 0.5
 
   return (
-    <div className="mx-auto flex min-h-svh max-w-3xl flex-col gap-6 p-4 sm:p-6">
-      <header className="flex items-center justify-between gap-4">
-        <h1 className="font-heading text-2xl font-medium">
+    <div className="mx-auto flex min-h-svh max-w-3xl flex-col gap-3 p-3 sm:gap-6 sm:p-6">
+      <header className="flex items-center justify-between gap-2">
+        <h1 className="font-heading text-xl font-medium">
           Lokata vs mieszkanie
         </h1>
-        <ThemeToggle />
+        <div className="flex gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            aria-label="Przywróć domyślne"
+            onClick={() => setInputs(DEFAULTS)}
+          >
+            <RotateCcw />
+          </Button>
+          <ThemeToggle />
+        </div>
       </header>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Wynik</CardTitle>
-          <CardDescription>
-            Miesięczny zarobek po podatku, uśredniony na 12 miesięcy.
-          </CardDescription>
-          <CardAction>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-sm"
-              aria-label="Przywróć domyślne"
-              onClick={() => setInputs(DEFAULTS)}
-            >
-              <RotateCcw />
-            </Button>
-          </CardAction>
-        </CardHeader>
-        <CardContent className="space-y-5">
-          <div className="grid grid-cols-2 gap-4">
-            <Stat label="Lokata" hint="na miesiąc, po podatku">
+      <Card size="sm" className="[--card-spacing:--spacing(3)]">
+        <CardContent className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <Stat label="Lokata">
               <Money value={r.depositMonthlyNet} />
             </Stat>
-            <Stat label="Mieszkanie" hint="na miesiąc, po podatku">
+            <Stat label="Mieszkanie">
               <Money value={r.rentMonthlyNetAveraged} />
             </Stat>
           </div>
           <div
             className={cn(
-              "rounded-2xl p-4 text-center",
+              "flex items-center justify-between gap-2 rounded-2xl px-4 py-2",
               tie
                 ? "bg-muted"
                 : apartmentWins
@@ -99,33 +86,32 @@ export function App() {
               {tie
                 ? "Remis"
                 : apartmentWins
-                  ? "Mieszkanie wygrywa o"
-                  : "Lokata wygrywa o"}
+                  ? "Mieszkanie wygrywa"
+                  : "Lokata wygrywa"}
             </p>
-            <p className="font-mono text-2xl font-medium tabular-nums">
+            <p className="font-mono text-lg font-medium tabular-nums">
               <Money value={Math.abs(r.difference)} suffix=" / mies." />
             </p>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card size="sm" className="[--card-spacing:--spacing(3)]">
         <CardHeader>
           <CardTitle>Lokata</CardTitle>
-          <CardDescription>Ile na koncie i jaki procent.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
-            <SliderInputField
-              id="balance"
-              label="Ile na koncie"
-              value={inputs.balance}
-              onChange={setAmount}
-              steps={AMOUNT_STEPS}
-              unit="zł"
-              typedMin={0}
-              typedMax={50_000_000}
-            />
+        <CardContent className="space-y-3">
+          <SliderInputField
+            id="balance"
+            label="Ile na koncie"
+            value={inputs.balance}
+            onChange={setAmount}
+            steps={AMOUNT_STEPS}
+            unit="zł"
+            typedMin={0}
+            typedMax={50_000_000}
+          />
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3">
             <SliderInputField
               id="deposit-rate"
               label="Jaki procent"
@@ -137,11 +123,12 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
+              inputClassName="w-[4.5rem]"
             />
             <SliderInputField
               id="deposit-tax"
+              label="Podatek"
               showSlider={false}
-              label="Podatek od zysku"
               value={inputs.depositTaxPct}
               onChange={set("depositTaxPct")}
               min={0}
@@ -150,54 +137,51 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
+              inputClassName="w-[4.5rem]"
             />
           </div>
           <Separator />
-          <div className="grid grid-cols-2 gap-4">
-            <Stat label="Ile zarobku" hint="miesięcznie, brutto">
+          <div className="grid grid-cols-2 gap-3">
+            <Stat label="Ile zarobku">
               <Money value={r.depositMonthlyGross} />
             </Stat>
-            <Stat
-              label={`Po podatku ${pct(inputs.depositTaxPct)}`}
-              hint="miesięcznie, netto"
-            >
+            <Stat label={`Po podatku ${pct(inputs.depositTaxPct)}`}>
               <Money value={r.depositMonthlyNet} />
             </Stat>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card size="sm" className="[--card-spacing:--spacing(3)]">
         <CardHeader>
           <CardTitle>Mieszkanie</CardTitle>
-          <CardDescription>Cena, czynsz i wynajem w roku.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
-            <SliderInputField
-              id="price"
-              label="Cena mieszkania"
-              value={inputs.price}
-              onChange={setAmount}
-              steps={AMOUNT_STEPS}
-              unit="zł"
-              typedMin={0}
-              typedMax={50_000_000}
-            />
-            <SliderInputField
-              id="rent"
-              label="Jaki czynsz miesięczny"
-              value={inputs.rent}
-              onChange={set("rent")}
-              steps={RENT_STEPS}
-              unit="zł"
-              typedMin={0}
-              typedMax={500_000}
-            />
+        <CardContent className="space-y-3">
+          <SliderInputField
+            id="price"
+            label="Cena mieszkania"
+            value={inputs.price}
+            onChange={setAmount}
+            steps={AMOUNT_STEPS}
+            unit="zł"
+            typedMin={0}
+            typedMax={50_000_000}
+          />
+          <SliderInputField
+            id="rent"
+            label="Jaki czynsz miesięczny"
+            value={inputs.rent}
+            onChange={set("rent")}
+            steps={RENT_STEPS}
+            unit="zł"
+            typedMin={0}
+            typedMax={500_000}
+          />
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3">
             <SliderInputField
               id="rent-tax"
-              showSlider={false}
               label="Podatek"
+              showSlider={false}
               value={inputs.rentTaxPct}
               onChange={set("rentTaxPct")}
               min={0}
@@ -206,11 +190,12 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
+              inputClassName="w-[4.5rem]"
             />
             <SliderInputField
               id="months"
+              label="Miesiące w roku"
               showSlider={false}
-              label="Miesiące wynajmu w roku"
               value={inputs.monthsRented}
               onChange={set("monthsRented")}
               min={0}
@@ -218,27 +203,20 @@ export function App() {
               step={1}
               typedMin={0}
               typedMax={12}
+              inputClassName="w-14"
             />
           </div>
           <Separator />
-          <div className="grid grid-cols-2 gap-4">
-            <Stat label="Ile zarobku %" hint="roczny czynsz / cena">
+          <div className="grid grid-cols-3 gap-2">
+            <Stat label="Ile zarobku %">
               <Money value={r.rentYieldPct} format={percentFormat} suffix="%" />
             </Stat>
-            <Stat
-              label={`Kwota po podatku ${pct(inputs.rentTaxPct)}`}
-              hint="czynsz miesięcznie, netto"
-            >
+            <Stat label={`Po podatku ${pct(inputs.rentTaxPct)}`}>
               <Money value={r.rentMonthlyNet} />
             </Stat>
-            <div className="col-span-2">
-              <Stat
-                label={`Po podatku ${pct(inputs.rentTaxPct)}, wynajęte przez ${inputs.monthsRented} mies.`}
-                hint="średnio na miesiąc w roku"
-              >
-                <Money value={r.rentMonthlyNetAveraged} />
-              </Stat>
-            </div>
+            <Stat label={`Wynajęte ${inputs.monthsRented} mies.`}>
+              <Money value={r.rentMonthlyNetAveraged} />
+            </Stat>
           </div>
         </CardContent>
       </Card>

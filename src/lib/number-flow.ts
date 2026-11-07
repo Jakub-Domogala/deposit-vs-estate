@@ -25,6 +25,9 @@ const singleStepPlugin: Plugin = {
 }
 
 export const numberFlowPlugins = [singleStepPlugin]
-export const transformTiming: EffectTiming = { duration: 350, easing: "ease-out" }
+export const transformTiming: EffectTiming = {
+  duration: 350,
+  easing: "ease-out",
+}
 export const spinTiming: EffectTiming = { duration: 350, easing: "ease-out" }
 export const opacityTiming: EffectTiming = { duration: 200, easing: "ease-out" }

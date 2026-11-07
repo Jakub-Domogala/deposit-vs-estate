@@ -15,11 +15,11 @@ export function Stat({
 }) {
   return (
     <div className="space-y-1">
-      <p className="text-sm text-muted-foreground">{label}</p>
+      <p className="text-xs leading-tight text-muted-foreground">{label}</p>
       <div
         className={cn(
           "font-mono font-medium tabular-nums",
-          emphasize ? "text-3xl text-primary" : "text-xl"
+          emphasize ? "text-3xl text-primary" : "text-base"
         )}
       >
         {children}

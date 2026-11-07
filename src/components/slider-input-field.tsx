@@ -15,6 +15,8 @@ interface SliderInputFieldCommonProps {
   disabled?: boolean
   /** Set to false for a plain number field without the slider. Default true. */
   showSlider?: boolean
+  /** Overrides the default width of the number input (default "w-28"). */
+  inputClassName?: string
   /** Shown after the number, e.g. "%" or "yr". */
   unit?: string
   /** Shown before the number, e.g. "$". */
@@ -63,6 +65,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
     onChange,
     disabled,
     showSlider = true,
+    inputClassName = "w-28",
     unit,
     prefix,
     endAction,
@@ -100,9 +103,11 @@ export function SliderInputField(props: SliderInputFieldProps) {
   const sliderStep = discrete ? 1 : props.step
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between gap-3">
-        <Label htmlFor={id}>{label}</Label>
+    <div className="space-y-2">
+      <div className="flex items-center justify-between gap-2">
+        <Label htmlFor={id} className="leading-tight">
+          {label}
+        </Label>
         <div className="flex items-center gap-2">
           {endAction}
           <div className="relative">
@@ -120,7 +125,8 @@ export function SliderInputField(props: SliderInputFieldProps) {
               onChange={(event) => handleTextChange(event.target.value)}
               onBlur={handleBlur}
               className={cn(
-                "h-8 w-28 text-right",
+                "h-8 text-right",
+                inputClassName,
                 prefix && "pl-6",
                 unit && "pr-8"
               )}
