@@ -78,8 +78,8 @@ export function App() {
               tie
                 ? "bg-muted"
                 : apartmentWins
-                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-                  : "bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                  ? "bg-pink-500/15 text-pink-700 dark:text-pink-300"
+                  : "bg-violet-500/15 text-violet-700 dark:text-violet-300"
             )}
           >
             <p className="text-sm">
