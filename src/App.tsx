@@ -110,7 +110,7 @@ export function App() {
             unit="zł"
             typedMin={0}
             typedMax={1_500_000}
-            inputClassName="w-36"
+            inputClassName="w-40"
           />
           <div className="grid grid-cols-2 gap-x-4 gap-y-3">
             <SliderInputField
@@ -124,7 +124,7 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
-              inputClassName="w-[4.5rem]"
+              inputClassName="w-[5.5rem]"
             />
             <SliderInputField
               id="deposit-tax"
@@ -138,7 +138,7 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
-              inputClassName="w-[4.5rem]"
+              inputClassName="w-[5.5rem]"
             />
           </div>
           <Separator />
@@ -167,7 +167,7 @@ export function App() {
             unit="zł"
             typedMin={0}
             typedMax={1_500_000}
-            inputClassName="w-36"
+            inputClassName="w-40"
           />
           <SliderInputField
             id="rent"
@@ -192,7 +192,7 @@ export function App() {
               unit="%"
               typedMin={0}
               typedMax={100}
-              inputClassName="w-[4.5rem]"
+              inputClassName="w-[5.5rem]"
             />
             <SliderInputField
               id="months"
@@ -205,7 +205,7 @@ export function App() {
               step={1}
               typedMin={0}
               typedMax={12}
-              inputClassName="w-14"
+              inputClassName="w-16"
             />
           </div>
           <Separator />

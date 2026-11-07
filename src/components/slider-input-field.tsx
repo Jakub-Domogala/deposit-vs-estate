@@ -65,7 +65,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
     onChange,
     disabled,
     showSlider = true,
-    inputClassName = "w-28",
+    inputClassName = "w-32",
     unit,
     prefix,
     endAction,
@@ -125,7 +125,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
               onChange={(event) => handleTextChange(event.target.value)}
               onBlur={handleBlur}
               className={cn(
-                "h-8 text-right",
+                "h-9 bg-[oklch(0.89_0.07_265)] text-right text-base font-medium md:text-base dark:bg-input/50",
                 inputClassName,
                 prefix && "pl-6",
                 unit && "pr-8"
