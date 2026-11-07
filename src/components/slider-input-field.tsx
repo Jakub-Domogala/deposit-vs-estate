@@ -17,6 +17,8 @@ interface SliderInputFieldCommonProps {
   showSlider?: boolean
   /** Overrides the default width of the number input (default "w-28"). */
   inputClassName?: string
+  /** Extra classes for the slider root, e.g. to tint its track and fill. */
+  sliderClassName?: string
   /** Shown after the number, e.g. "%" or "yr". */
   unit?: string
   /** Shown before the number, e.g. "$". */
@@ -66,6 +68,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
     disabled,
     showSlider = true,
     inputClassName = "w-32",
+    sliderClassName,
     unit,
     prefix,
     endAction,
@@ -141,6 +144,7 @@ export function SliderInputField(props: SliderInputFieldProps) {
       </div>
       {showSlider ? (
         <Slider
+          className={sliderClassName}
           id={`${id}-slider`}
           value={sliderValue}
           onValueChange={handleSliderChange}

@@ -27,6 +27,11 @@ const DEFAULTS: Inputs = {
 const VIOLET = "bg-violet-200 dark:bg-violet-500/25"
 const PINK = "bg-pink-200 dark:bg-pink-500/25"
 
+const VIOLET_SLIDER =
+  "[&_[data-slot=slider-range]]:bg-violet-500 [&_[data-slot=slider-track]]:bg-violet-200 dark:[&_[data-slot=slider-track]]:bg-violet-500/25"
+const PINK_SLIDER =
+  "[&_[data-slot=slider-range]]:bg-pink-500 [&_[data-slot=slider-track]]:bg-pink-200 dark:[&_[data-slot=slider-track]]:bg-pink-500/25"
+
 const pct = (n: number) =>
   `${Number(n.toFixed(2)).toString().replace(".", ",")}%`
 
@@ -74,6 +79,7 @@ export function App() {
           <CardContent className="space-y-3">
             <SliderInputField
               id="balance"
+              sliderClassName={VIOLET_SLIDER}
               label="Ile na koncie"
               value={inputs.balance}
               onChange={setAmount}
@@ -86,6 +92,7 @@ export function App() {
             <div className="grid grid-cols-2 gap-x-4 gap-y-3">
               <SliderInputField
                 id="deposit-rate"
+                sliderClassName={VIOLET_SLIDER}
                 label="Jaki procent"
                 value={inputs.depositRatePct}
                 onChange={set("depositRatePct")}
@@ -131,6 +138,7 @@ export function App() {
           <CardContent className="space-y-3">
             <SliderInputField
               id="price"
+              sliderClassName={PINK_SLIDER}
               label="Cena mieszkania"
               value={inputs.price}
               onChange={setAmount}
@@ -142,6 +150,7 @@ export function App() {
             />
             <SliderInputField
               id="rent"
+              sliderClassName={PINK_SLIDER}
               inputClassName={`w-32 ${PINK}`}
               label="Jaki czynsz miesięczny"
               value={inputs.rent}
